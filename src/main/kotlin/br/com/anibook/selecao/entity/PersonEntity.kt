@@ -1,6 +1,6 @@
 package br.com.anibook.selecao.entity
 
-import java.util.*
+import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
@@ -9,5 +9,5 @@ data class PersonEntity(@Id @GeneratedValue(strategy = GenerationType.AUTO) val 
                         val name: String = "",
                         val cpf: String = "",
                         val address: String = "",
-                        val date: Date? = null) {
+                        val date: LocalDate? = null) {
 }
