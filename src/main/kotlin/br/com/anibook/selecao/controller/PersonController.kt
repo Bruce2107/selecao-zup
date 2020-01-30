@@ -1,10 +1,9 @@
 package br.com.anibook.selecao.controller
 
-import br.com.anibook.selecao.entity.PersonEntity
+import br.com.anibook.selecao.entity.Person
 import br.com.anibook.selecao.exception.NotFoundException
 import br.com.anibook.selecao.exception.ServiceException
 import br.com.anibook.selecao.service.PersonService
-import br.com.anibook.selecao.utils.Constants
 import br.com.anibook.selecao.utils.Constants.Companion.URL_BASE_PERSON
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
@@ -19,7 +18,7 @@ class PersonController {
     lateinit var personService: PersonService
     //Controller para busca de todos os dados
     @GetMapping()
-    fun list(): ResponseEntity<List<PersonEntity>> {
+    fun list(): ResponseEntity<List<Person>> {
         return try {
             ResponseEntity.ok(personService.list())
         } catch (e: Exception) {
@@ -28,7 +27,7 @@ class PersonController {
     }
     //Controller para busca de uma 'Person' pelo seu id
     @GetMapping("/{id}")
-    fun load(@PathVariable("id") id: Long): ResponseEntity<PersonEntity> {
+    fun load(@PathVariable("id") id: Long): ResponseEntity<Person> {
         return try {
             ResponseEntity.ok(personService.load(id))
         } catch (e: Exception) {
@@ -36,12 +35,12 @@ class PersonController {
         }
     }
     //Controller para adição de uma nova 'Person'
-    @PostMapping()
-    fun insert(@RequestBody personEntity: PersonEntity): ResponseEntity<Any> {
+    @PostMapping
+    fun insert(@RequestBody person: Person): ResponseEntity<Any> {
         return try {
-            personService.save(personEntity)
+            personService.save(person)
             val responseHeader = HttpHeaders()
-            responseHeader.set("location", """${URL_BASE_PERSON}/${personEntity.id}""")
+            responseHeader.set("location", """${URL_BASE_PERSON}/${person.id}""")
             ResponseEntity(responseHeader, HttpStatus.CREATED)
         } catch (e: ServiceException) {
             ResponseEntity.badRequest().build()
@@ -49,9 +48,9 @@ class PersonController {
     }
     //Controller para edição de um dado - O id deve ser informado no JSON
     @PutMapping("")
-    fun upd(@RequestBody personEntity: PersonEntity): ResponseEntity<Any> {
+    fun upd(@RequestBody person: Person): ResponseEntity<Any> {
         return try {
-            personService.save(personEntity)
+            personService.save(person)
             ResponseEntity.ok().build()
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()

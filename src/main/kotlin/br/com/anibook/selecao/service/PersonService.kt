@@ -1,6 +1,6 @@
 package br.com.anibook.selecao.service
 
-import br.com.anibook.selecao.entity.PersonEntity
+import br.com.anibook.selecao.entity.Person
 import br.com.anibook.selecao.exception.NotFoundException
 import br.com.anibook.selecao.exception.ServiceException
 import br.com.anibook.selecao.repository.PersonRepository
@@ -15,7 +15,7 @@ class PersonService : PersonServiceInterface {
     lateinit var personRepository: PersonRepository
     //Service para retorno de todos os dados
     @Throws(ServiceException::class)
-    override fun list(): List<PersonEntity> {
+    override fun list(): List<Person> {
         try {
             return personRepository.findAll()
         } catch (e: Exception) {
@@ -24,17 +24,17 @@ class PersonService : PersonServiceInterface {
     }
     //Service para salvar uma nova 'Person'
     @Throws(ServiceException::class)
-    override fun save(personEntity: PersonEntity): PersonEntity {
+    override fun save(person: Person): Person {
         try {
-            return personRepository.save(personEntity)
+            return personRepository.save(person)
         } catch (e: Exception) {
             throw ServiceException(e.message.toString())
         }
     }
     //Service para buscar os dados de um objeto pelo id
     @Throws(ServiceException::class, NotFoundException::class)
-    override fun load(id: Long): PersonEntity {
-        val optional: Optional<PersonEntity>
+    override fun load(id: Long): Person {
+        val optional: Optional<Person>
         try {
             optional = personRepository.findById(id)
         } catch (e: Exception) {
@@ -49,7 +49,7 @@ class PersonService : PersonServiceInterface {
     //Service para remoção de um dado a partir de seu id
     @Throws(ServiceException::class, NotFoundException::class)
     override fun delete(id: Long) {
-        val optional: Optional<PersonEntity>
+        val optional: Optional<Person>
         try {
             optional = personRepository.findById(id)
         } catch (e: Exception) {
