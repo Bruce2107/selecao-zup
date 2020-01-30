@@ -6,9 +6,9 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "person")
-data class Person(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long = 0L,
-                  val name: String = "",
-                  val cpf: String = "",
-                  val address: String = "",
-                  val nasc: Date? = null) {
+data class Person(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long = 0L,
+                  var name: String = "",
+                  var cpf: String = "",
+                  var address: String = "",
+                  var nasc: Date? = null) {
 }

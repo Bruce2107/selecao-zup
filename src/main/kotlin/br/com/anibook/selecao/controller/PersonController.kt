@@ -46,16 +46,6 @@ class PersonController {
             ResponseEntity.badRequest().build()
         }
     }
-    //Controller para edição de um dado - O id deve ser informado no JSON
-    @PutMapping("")
-    fun upd(@RequestBody person: Person): ResponseEntity<Any> {
-        return try {
-            personService.save(person)
-            ResponseEntity.ok().build()
-        } catch (e: Exception) {
-            ResponseEntity.badRequest().build()
-        }
-    }
     //Controller para a remoção de um dado
     @DeleteMapping("/{id}")
     fun remove(@PathVariable("id") id: Long): ResponseEntity<Any> {
@@ -65,6 +55,18 @@ class PersonController {
             ResponseEntity.badRequest().build()
         } catch (e: NotFoundException) {
             ResponseEntity.notFound().build()
+        }
+    }
+
+    //Controller para edição de uma 'Person'
+    @PutMapping("/{id}")
+    fun update(@PathVariable("id") id: Long, @RequestBody person: Person):ResponseEntity<Any>{
+        person.id = id
+        val person2: Person = personService.put(id,person)
+        return try{
+            ResponseEntity.ok(personService.save(person2))
+        }catch (e: Exception){
+            ResponseEntity.badRequest().build()
         }
     }
 }
