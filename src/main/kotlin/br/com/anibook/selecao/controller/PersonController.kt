@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*
 class PersonController {
     @Autowired
     lateinit var personService: PersonService
-
+    //Controller para busca de todos os dados
     @GetMapping()
     fun list(): ResponseEntity<List<PersonEntity>> {
         return try {
@@ -26,7 +26,7 @@ class PersonController {
             ResponseEntity.badRequest().build()
         }
     }
-
+    //Controller para busca de uma 'Person' pelo seu id
     @GetMapping("/{id}")
     fun load(@PathVariable("id") id: Long): ResponseEntity<PersonEntity> {
         return try {
@@ -35,7 +35,7 @@ class PersonController {
             ResponseEntity.notFound().build()
         }
     }
-
+    //Controller para adição de uma nova 'Person'
     @PostMapping()
     fun insert(@RequestBody personEntity: PersonEntity): ResponseEntity<Any> {
         return try {
@@ -47,7 +47,7 @@ class PersonController {
             ResponseEntity.badRequest().build()
         }
     }
-
+    //Controller para edição de um dado - O id deve ser informado no JSON
     @PutMapping("")
     fun upd(@RequestBody personEntity: PersonEntity): ResponseEntity<Any> {
         return try {
@@ -57,6 +57,7 @@ class PersonController {
             ResponseEntity.badRequest().build()
         }
     }
+    //Controller para a remoção de um dado
     @DeleteMapping("/{id}")
     fun remove(@PathVariable("id") id: Long): ResponseEntity<Any> {
         return try {

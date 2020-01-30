@@ -8,12 +8,12 @@ import br.com.anibook.selecao.serviceInterface.PersonServiceInterface
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
-
+//Implementação da interface
 @Service
 class PersonService : PersonServiceInterface {
     @Autowired
     lateinit var personRepository: PersonRepository
-
+    //Service para retorno de todos os dados
     @Throws(ServiceException::class)
     override fun list(): List<PersonEntity> {
         try {
@@ -22,7 +22,7 @@ class PersonService : PersonServiceInterface {
             throw ServiceException(e.message.toString())
         }
     }
-
+    //Service para salvar uma nova 'Person'
     @Throws(ServiceException::class)
     override fun save(personEntity: PersonEntity): PersonEntity {
         try {
@@ -31,7 +31,7 @@ class PersonService : PersonServiceInterface {
             throw ServiceException(e.message.toString())
         }
     }
-
+    //Service para buscar os dados de um objeto pelo id
     @Throws(ServiceException::class, NotFoundException::class)
     override fun load(id: Long): PersonEntity {
         val optional: Optional<PersonEntity>
@@ -46,7 +46,7 @@ class PersonService : PersonServiceInterface {
 
         return optional.get()
     }
-
+    //Service para remoção de um dado a partir de seu id
     @Throws(ServiceException::class, NotFoundException::class)
     override fun delete(id: Long) {
         val optional: Optional<PersonEntity>
