@@ -1,7 +1,7 @@
 package br.com.anibook.selecao.entity
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
-import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -10,5 +10,6 @@ data class Person(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id
                   var name: String = "",
                   var cpf: String = "",
                   var address: String = "",
-                  var nasc: Date? = null) {
+//                  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+                  var nasc: LocalDate? = null) {
 }
