@@ -70,20 +70,22 @@ class PersonService : PersonServiceInterface {
     }
 
     @Throws(NotFoundException::class, ServiceException::class)
-    fun put(id: Long, person: Person): Person {
+    override fun put(id: Long, person: Person): Person {
         val optional: Optional<Person>
         try {
             optional = personRepository.findById(id)
         } catch (e: Exception) {
-            throw ServiceException(e.message.toString())
+            throw ServiceException(message = e.message.toString())
         }
-        if (optional.isPresent) {
+        return if (optional.isPresent) {
             val personTemp = optional.get()
-            personTemp.name = person.name
-            personTemp.cpf = person.cpf
-            personTemp.address = person.address
-            personTemp.nasc = person.nasc
-            return personTemp
+            with(personTemp, {
+                name = person.name
+                cpf = person.cpf
+                address = person.address
+                nasc = person.nasc
+            })
+            personTemp
         } else throw NotFoundException("Person not found")
     }
 }

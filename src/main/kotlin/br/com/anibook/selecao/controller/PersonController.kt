@@ -67,7 +67,7 @@ class PersonController {
         }
     }
 
-    //Controller para edição de uma 'Person'
+//    //Controller para edição de uma 'Person'
     @PutMapping("/{id}")
     fun update(@PathVariable("id") id: Long, @RequestBody person: Person):ResponseEntity<Any>{
         person.id = id

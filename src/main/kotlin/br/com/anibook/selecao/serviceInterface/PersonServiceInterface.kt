@@ -7,4 +7,5 @@ interface PersonServiceInterface {
     fun save(person: Person): Person
     fun load(id: Long): Person
     fun delete(id: Long)
+    fun put(id: Long, person: Person): Person
 }

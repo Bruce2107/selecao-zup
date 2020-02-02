@@ -13,7 +13,6 @@ class SelecaoApplication {
     @PostConstruct
     fun init() {
         TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"))
-//        println("data criada: ${LocalDate.parse("2001-07-21")}")
     }
 
 }
