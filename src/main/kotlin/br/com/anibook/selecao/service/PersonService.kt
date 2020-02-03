@@ -5,8 +5,10 @@ import br.com.anibook.selecao.exception.NotFoundException
 import br.com.anibook.selecao.exception.ServiceException
 import br.com.anibook.selecao.repository.PersonRepository
 import br.com.anibook.selecao.serviceInterface.PersonServiceInterface
+import br.com.anibook.selecao.utils.Constants.Companion.NOT_FOUND
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import sun.rmi.rmic.Constants
 import java.util.*
 
 //Implementação da interface
@@ -43,7 +45,7 @@ class PersonService : PersonServiceInterface {
             throw ServiceException(e.message.toString())
         }
         if (!optional.isPresent) {
-            throw NotFoundException("Person not found")
+            throw NotFoundException(NOT_FOUND)
         }
 
         return optional.get()
@@ -59,7 +61,7 @@ class PersonService : PersonServiceInterface {
             throw ServiceException(e.message.toString())
         }
         if (!optional.isPresent) {
-            throw NotFoundException("Person not found")
+            throw NotFoundException(NOT_FOUND)
         } else {
             try {
                 return personRepository.deleteById(id)
@@ -69,6 +71,7 @@ class PersonService : PersonServiceInterface {
         }
     }
 
+    //Atualiza os dados de uma 'Person'
     @Throws(NotFoundException::class, ServiceException::class)
     override fun put(id: Long, person: Person): Person {
         val optional: Optional<Person>
@@ -86,6 +89,6 @@ class PersonService : PersonServiceInterface {
                 nasc = person.nasc
             })
             personTemp
-        } else throw NotFoundException("Person not found")
+        } else throw NotFoundException(NOT_FOUND)
     }
 }
