@@ -1,8 +1,7 @@
 # SELEÇÃO ZUP
 API em SpringBoot com Kotlin
 
-**Banco de dados**.
-O banco de dados para este projeto é o POSTGRESQL:9.6
+**Banco de dados**: POSTGRESQL:9.6
 1. Porta: 5432
 2. Senha: secret
 3. User: postegres
