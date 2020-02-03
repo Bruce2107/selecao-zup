@@ -1,7 +1,8 @@
 package br.com.anibook.selecao.controller;
 
-import br.com.anibook.selecao.entity.Person;
-import br.com.anibook.selecao.service.PersonService;
+import br.com.anibook.selecao.person.Person;
+import br.com.anibook.selecao.person.PersonController;
+import br.com.anibook.selecao.person.PersonServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -31,7 +32,7 @@ public class JavaControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private PersonService personService;
+    private PersonServiceImpl personServiceImpl;
 
     @Test
     public void TestCreatePerson() throws Exception {
@@ -39,7 +40,7 @@ public class JavaControllerTest {
         String inputJson = this.mapToJson(person);
         String URI = "/api/v1/person/";
 
-        Mockito.when(personService.save(Mockito.any(Person.class))).thenReturn(person);
+        Mockito.when(personServiceImpl.save(Mockito.any(Person.class))).thenReturn(person);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URI).
                 accept(MediaType.APPLICATION_JSON).
@@ -62,7 +63,7 @@ public class JavaControllerTest {
         listPerson.add(person);
         listPerson.add(person2);
 
-        Mockito.when(personService.list()).thenReturn(listPerson);
+        Mockito.when(personServiceImpl.list()).thenReturn(listPerson);
         String URI = "/api/v1/person/";
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI).accept(MediaType.APPLICATION_JSON);
 
@@ -76,7 +77,7 @@ public class JavaControllerTest {
     @Test
     public void getByIdTest() throws Exception {
         Person person = new Person(1L, "Eduardo", "473", "pires", null);
-        Mockito.when(personService.load(Mockito.anyLong())).thenReturn(person);
+        Mockito.when(personServiceImpl.load(Mockito.anyLong())).thenReturn(person);
         String URI = "/api/v1/person/1";
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI).accept(MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();

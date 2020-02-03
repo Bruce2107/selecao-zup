@@ -1,5 +1,5 @@
 package br.com.anibook.selecao.utils
-//URLS usadas pela API
+
 class Constants {
     companion object {
         private const val URL_API_BASE = "/api"

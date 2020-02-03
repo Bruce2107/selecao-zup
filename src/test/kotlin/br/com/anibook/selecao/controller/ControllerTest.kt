@@ -1,7 +1,7 @@
 package br.com.anibook.selecao.controller
 
-import br.com.anibook.selecao.entity.Person
-import br.com.anibook.selecao.service.PersonService
+import br.com.anibook.selecao.person.Person
+import br.com.anibook.selecao.person.PersonServiceImpl
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.Before
 import org.junit.Rule
@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
+import br.com.anibook.selecao.person.PersonController
 import java.time.LocalDate
 
 @RunWith(SpringJUnit4ClassRunner::class)
@@ -42,7 +43,7 @@ class ControllerTest {
     lateinit var context: WebApplicationContext
 
     @MockBean
-    private lateinit var service: PersonService
+    private lateinit var serviceImpl: PersonServiceImpl
 
     @Before
     fun init() {
@@ -60,7 +61,7 @@ class ControllerTest {
     @Test
     fun shouldCreateProduct() {
         val person = Person(id = 1L, name = "Eduardo", cpf = "47535061850", address = "pires", nasc = LocalDate.parse("2001-07-21"))
-        `when`(service.save(person)).thenReturn(person)
+        `when`(serviceImpl.save(person)).thenReturn(person)
         mockMvc.perform(post("/")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)

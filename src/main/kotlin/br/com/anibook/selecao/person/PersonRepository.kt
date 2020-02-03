@@ -1,6 +1,5 @@
-package br.com.anibook.selecao.repository
+package br.com.anibook.selecao.person
 
-import br.com.anibook.selecao.entity.Person
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
