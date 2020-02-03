@@ -8,7 +8,6 @@ import br.com.anibook.selecao.serviceInterface.PersonServiceInterface
 import br.com.anibook.selecao.utils.Constants.Companion.NOT_FOUND
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import sun.rmi.rmic.Constants
 import java.util.*
 
 //Implementação da interface

@@ -22,13 +22,12 @@ class PersonController {
 
     //Controller para busca de todos os dados
     @GetMapping()
-    fun list(): ResponseEntity<List<Person>> {
-        return try {
-            ResponseEntity.ok(personService.list())
-        } catch (e: Exception) {
-            ResponseEntity.badRequest().build()
-        }
-    }
+    fun list(): ResponseEntity<List<Person>> =
+            try {
+                ResponseEntity.ok(personService.list())
+            } catch (e: Exception) {
+                ResponseEntity.badRequest().build()
+            }
 
     //Controller para busca de uma 'Person' pelo seu id
     @GetMapping("/{id}")
@@ -67,15 +66,15 @@ class PersonController {
         }
     }
 
-//    //Controller para edição de uma 'Person'
+    //    //Controller para edição de uma 'Person'
     @PutMapping("/{id}")
-    fun update(@PathVariable("id") id: Long, @RequestBody person: Person):ResponseEntity<Any>{
+    fun update(@PathVariable("id") id: Long, @RequestBody person: Person): ResponseEntity<Any> {
         person.id = id
         person.nasc
-        val person2: Person = personService.put(id,person)
-        return try{
+        val person2: Person = personService.put(id, person)
+        return try {
             ResponseEntity.ok(personService.save(person2))
-        }catch (e: Exception){
+        } catch (e: Exception) {
             ResponseEntity.badRequest().build()
         }
     }
